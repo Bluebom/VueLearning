@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../../arquivoVue/vue.js"></script>
+  <title>Vue.js</title>
+</head>
+<body>
+  <div id="app">
+    <p>Para terminarmos a construção precisamos de um(a)...</p>
+  </div>
+  <div id="app1">
+      {{ferramenta}}
+  </div>
+  <div id="app2">
+      {{instrumento}}
+  </div>
+
+  <script>
+   const vm = new Vue({
+       el: "#app",
+       data:{
+            nome: "martelo",
+       }
+   })
+   const vm1 = new Vue({
+       el: "#app1",
+       data:{
+            ferramenta: vm.nome
+       }
+   })
+   const vm2 = new Vue({
+       el: "#app2",
+       data:{
+            instrumento: "violino",
+       }
+   })
+  </script>
+</body>
+</html>

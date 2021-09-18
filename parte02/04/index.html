@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue.js</title>
+</head>
+<body>
+
+    <div id="app">
+        <p>THING in portuguese means: <strong>{{thing}}</strong></p>
+        <input v-model="message">
+        <button @click="translate(message)">TRANSLATE</button>
+    </div>
+
+    <script src="../../arquivoVue/vue.js"></script>
+    <script>
+        const url = 'https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_b47f6bc7520d43be82b779d469c8f427';
+        
+        const vm = new Vue({
+            el: "#app",
+            data:{
+                thing: '',
+                message: ''
+            },
+            methods:{
+                translate(word){
+                    this.thing = word;
+                    this.consoleLog();
+                },
+                consoleLog(){
+                    console.log(this.thing);
+                }
+            }
+
+        })
+    </script>
+
+</body>
+</html>

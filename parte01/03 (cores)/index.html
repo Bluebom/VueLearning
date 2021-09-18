@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../../arquivoVue/vue.js"></script>
+  <title>Vue.js</title>
+</head>
+<body>
+  <div id="app">
+    <h3>{{titulo}}</h3>
+    <article v-if="comprou">
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti, id, porro omnis provident quas iure aspernatur, numquam quis fugiat dolore quam et libero! Dignissimos earum eius expedita omnis labore? Praesentium?</p>
+    </article>
+    <button @click="comprou = !comprou" >remover</button>
+    <p>
+      <input v-model="cor" type="color">
+      <span v-bind:style="{color:cor}">{{cor}}</span>
+    </p>
+    <a v-bind:href="href" target="_blank">ir para curso</a>
+  </div>
+
+  <script>
+
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        titulo: "curso de JavaScript",
+        href: "https://www.origamid.com",
+        comprou: true,
+        cor: "#000000"
+      }
+    })
+  
+  </script>
+</body>
+</html>
