@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <!--api apple-->
+        <section class="container p-3">
+            <ul class="list-group">
+                <li class="list-group-item"><a @click.prevent="mostrarDados('https://cloud.iexapis.com/stable/stock/pypl/quote?token=pk_b47f6bc7520d43be82b779d469c8f427')" href="https://cloud.iexapis.com/stable/stock/pypl/quote?token=pk_b47f6bc7520d43be82b779d469c8f427" target="_blank">PayPal</a></li>
+                <li class="list-group-item"><a @click.prevent="mostrarDados('https://cloud.iexapis.com/stable/stock/ebay/quote?token=pk_b47f6bc7520d43be82b779d469c8f427')" href="https://cloud.iexapis.com/stable/stock/ebay/quote?token=pk_b47f6bc7520d43be82b779d469c8f427" target="_blank">E-Bay</a></li>
+                <li class="list-group-item"><a @click.prevent="mostrarDados('https://cloud.iexapis.com/stable/stock/googl/quote?token=pk_b47f6bc7520d43be82b779d469c8f427')" href="https://cloud.iexapis.com/stable/stock/googl/quote?token=pk_b47f6bc7520d43be82b779d469c8f427" target="_blank">Google</a></li>
+                <li class="list-group-item"><a @click.prevent="mostrarDados('https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_b47f6bc7520d43be82b779d469c8f427')" href="https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_b47f6bc7520d43be82b779d469c8f427" target="_blank">Apple</a></li>
+              </ul>
+
+              <main v-if="test" class="d-flex justify-content-between mt-3">
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{dadosApi.companyName}}</h5>
+                        <p class="card-text">Último valor: ${{dadosApi.latestPrice}}</p>
+                        <p class="card-text">Capital de mercado: ${{dadosApi.marketCap}}</p>
+                    </div>
+                </div>
+
+              </main>
+              
+        </section>
+    </div>
+
+    <script src="../../arquivoVue/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+               api:'',
+               dadosApi: '',
+               test: false
+            },
+            methods: {
+                mostrarDados(api){
+                    this.fetchApi(api);
+                    this.test = !this.test;
+                },
+                fetchApi(url){
+                    fetch(url).then(res => res.json()).then(json => { this.dadosApi = json })
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>
