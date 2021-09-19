@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>v-html</title>
+</head>
+
+<body>
+
+    <div id="app" class="container p-3">
+        <ul class="list-group mb-3">
+            <li v-for="(item, key) in lista" class="list-group-item">{{item}}</li>
+        </ul>
+        
+        <input v-model="message" type="text" class="p-2">
+        <button @click="modificarItem(message)" class="btn btn-primary me-3">Modificar</button>
+        <button @click="removerItem" class="btn btn-danger ">Remover</button>
+        <main class="d-flex justify-content-start ms-4 gap-5 align-items-center flex-wrap pt-3">
+            <div v-for="(estado,key) in estados" class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{estado.nome}}</h5>
+                    <p class="card-text">População: {{estado.populacao}}</p>
+                </div>
+                <button @click="removerEstado(key)" class="btn btn-danger mt-2">Remover</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../arquivoVue/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                lista: ["Banana", "Uva", "Laranja"],
+                estados: {
+                    sp: {
+                        populacao: '45 milhões',
+                        nome: 'São Paulo'
+                    },
+                    mg: {
+                        populacao: '21 milhões',
+                        nome: 'Minas Gerais'
+                    },
+                    rj: {
+                        populacao: '17 milhões',
+                        nome: 'Rio de Janeiro'
+                    }
+                }
+            },
+            methods: {
+                removerItem() {
+                    this.lista.pop();
+                },
+                removerEstado(estado) {
+                    vm.$delete(this.estados, estado)
+                },
+                modificarItem(message){
+                    // modificando reativamente
+                    this.$set(this.lista, this.lista.length - 1, message);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
