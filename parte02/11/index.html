@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    
+    <title>Vue.js</title>
+</head>
+<body>
+    <div id="app" class="container p-3">
+        <ul v-for="carro in carros" class="list-group">
+            <li class="list-group-item"> <h2>{{carro.marca}}</h2><span>cor: {{carro.cor}}</span><br><span class="me-3">Velocidade: {{carro.velocidade}}</span><button @click="carro.velocidade++" class="btn btn-success">Aumentar</button></li>
+        </ul>
+        <button @click='removerCarro' class="btn btn-danger mt-3">Remover Carro</button>
+    </div>
+
+    <script src="../../arquivoVue/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data:{
+                carros:[
+                    {
+                        marca: "VW",
+                        cor: "Azul",
+                        velocidade: '0'
+                    },
+                    {
+                        marca: "Ford",
+                        cor: "Preta",
+                        velocidade: '0'
+                    },
+                    {
+                        marca: "Tesla",
+                        cor: "Prata",
+                        velocidade: '0'
+                    },
+                    {
+                        marca: "Fusca",
+                        cor: "Azul",
+                        velocidade: '0'
+                    }
+                ],
+            },
+            computed:{
+               carrosAzuis(){
+                   return this.carros.filter(({cor}) => cor == 'Azul');
+               }
+            },
+            methods:{
+                removerCarro(){
+                    return this.carros.pop()
+                }
+            },
+            watch:{
+                carros(vNovo, vAntigo){
+                    console.log(vNovo, vAntigo)
+                }
+                
+            }
+        })
+    </script>
+</body>
+</html>
