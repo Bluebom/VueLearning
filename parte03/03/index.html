@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Vue</title>
+</head>
+
+<body>
+    <div id="app" class="container pt-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input type="text" class="form-control" placeholder="Name" aria-label="Username"
+                aria-describedby="basic-addon1" :value="nome">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-text">
+                <input class="form-check-input mt-0" type="checkbox" v-model="bool"
+                    aria-label="Checkbox for following text input">
+            </div>
+            <input type="text" class="form-control" placeholder="Email" aria-label="Recipient's username"
+                aria-describedby="basic-addon2" v-model="email">
+            <span class="input-group-text" id="basic-addon2">@example.com</span>
+        </div>
+        <div class="row">
+            <div class="col-2 text-truncate">
+                {{nome}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 text-truncate">
+                <p v-if="bool">
+                    {{email}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../arquivoVue/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                nome: "Franklin Henrique",
+                email: "Franklinhpf@hotmail.com",
+                bool: ""
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>

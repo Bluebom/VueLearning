@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>Vue</title>
+</head>
+
+<body>
+    <div id="app" class="container p-3">
+        <ul class="list-group">
+            <li v-for="num in total" class="list-group-item"><div v-html='btnTemplate' v-once></div></li>
+        </ul>
+        <div class="d-flex justify-content-between gap-3 my-3">
+            <select class="form-select" aria-label="Default select example" v-model='al'>
+                <option disabled value="">Escolha um alinhamento</option>
+                <option value="0 0 auto 0">Esquerda</option>
+                <option value="0 0 0 auto">right</option>
+                <option value="0 auto">centro</option>
+            </select>
+            <input type="number" class="form-control" min=0 max=4 step=".5" v-model="fs">
+            <div class="input-group">
+                <input type="number" class="form-control" min=0 max=25 step="5" v-model="ra">
+                <span class="input-group-text">%</span>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between gap-3 mb-3">
+            <select class="form-select" aria-label="Default select example" v-model='select'>
+                <option disabled value="">Escolha uma cor</option>
+                <option value="btn-primary">Azul</option>
+                <option value="btn-secondary">Cinza</option>
+                <option value="btn-success">Verde</option>
+                <option value="btn-danger">Vermelho</option>
+                <option value="btn-warning">Amarelo</option>
+                <option value="btn-dark">Preto</option>
+            </select>
+        </div>
+        <button v-on:click="setBtn" class="btn btn-dark">Adicionar botão</button>
+    </div>
+
+    <script src="../../arquivoVue/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                btnTemplate: '',
+                fs: '1.5',
+                al: '0 auto',
+                ra: '5',
+                select: 'btn-dark',
+                total: 0,
+                btn: ''
+
+            },
+            methods: {
+                setBtn() {
+                    this.total == 0 ? this.total++ : this.total = 1;
+                    return this.btnTemplate = `<button style="display: block; font-size: ${this.fs}rem; margin: ${this.al}; border-radius: ${this.ra}%;" class="btn ${this.select}">your button</button>`
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
