@@ -10,9 +10,8 @@
 </head>
 <body>
     <div id="app" class="container p-3">
-        <label for="cars">Choose a Country:
-            <select name="select" v-model="selectValue">
-                <option :value="false">Paises</option>
+            <select class="form-select" aria-label="Default select example" v-model="selectValue">
+                <option selected :value="false">Paises</option>
                 <option v-for="dados in apiData" :value="dados.capital">{{dados.name}}</option>
             </select>
         </label>

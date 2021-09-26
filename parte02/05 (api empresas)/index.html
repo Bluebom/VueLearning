@@ -11,10 +11,10 @@
     <div id="app">
 
     <pre>
-    Latest Price: {{acoes.latestPrice}}
+    <!-- Latest Price: {{acoes.latestPrice}}
     Latest Price: {{acoes.latestTime}}
-    Company Name: {{acoes.companyName}}
-
+    Company Name: {{acoes.companyName}} -->
+    <p v-for="user in acoes.data">{{user.name}}</p>
     </pre>
     <button @click="puxarAcoes()">Puxar Ações</button>        
 
@@ -26,11 +26,11 @@
         const vm = new Vue({
             el: "#app",
             data:{
-                acoes:{},
+                acoes:'',
             },
             methods:{
                 puxarAcoes(){
-                    fetch("https://cloud.iexapis.com/stable/stock/nvda/quote?token=pk_b47f6bc7520d43be82b779d469c8f427")
+                    fetch("http://127.0.0.1:8000/api/users")
                     .then(response => response.json())
                     .then(json => {
                         this.acoes = json;
