@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        
+        <header class="header">
+            <img class="logo" src="./assets/img/techno.svg" alt="Techno">
+            <div class="carrinho_menu">{{carrinhoTotal | numeroPreco}} | {{carrinho.length}}</div>
+        </header>
+        <ul v-for="(item, index) in carrinho">
+            <li style="color: #ffffff;">{{item.id}} <button v-on:click="removerItem(index)">x</button></li>
+        </ul>
+
+
+        <!-- Produtos -->
+        <section class="produtos">
+            <div v-for="produto in produtos" :key="produto.id" v-on:click="abrirModal(produto.id)" class="produto">
+                <img v-bind:src="produto.img" v-bind:alt="produto.nome" class="produto_img">
+                <div>
+                    <span class="produto_preco">{{produto.preco | numeroPreco}}</span>
+                    <h2 class="produto_titulo">{{produto.nome}}</h2>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal -->
+        <section class="modal" v-if="produto" v-on:click="fecharModal">
+            <div class="modal_container">
+                <div class="modal_img">
+                    <img v-bind:src="produto.img" v-bind:alt="produto.nome">
+                </div>
+                <div class="modal_dados">
+                    <button v-on:click="produto = ''" class="modal_fechar">X</button>
+                    <span class="modal_preco">{{produto.preco | numeroPreco}}</span>
+                    <h2 class="modal_titulo">{{produto.nome}}</h2>
+                    <p>{{produto.descricao}}</p>
+                    <button v-if="produto.estoque > 0" v-on:click="adicionarItem" class="modal_btn">Adicionar Item</button>
+                    <button v-else class="modal_btn esgotado" disabled>Adicionar Item</button>
+                </div>
+                <div class="avaliacoes">
+                    <h2 class="avaliacoes_subtitulo">Avaliações</h2>
+                    <ul>
+                        <li v-for="review in produto.reviews" class="avaliacao">
+                            <p class="avaliacao_descricao">{{review.descricao}}</p>
+                            <p class="avaliacao_usuario">{{review.nome}} | {{review.estrelas}} estrelas</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <div :class="[alertaAtivo ? 'ativo' : '' , 'alerta']">
+            <p class="alerta_mensagem">{{mensagemAlerta}}</p>
+        </div>
+        
+    </div>
+    <script src="../arquivoVue/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
